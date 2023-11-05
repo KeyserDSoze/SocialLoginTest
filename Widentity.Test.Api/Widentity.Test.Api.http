@@ -1,0 +1,9 @@
+@Widentity.Test.Api_HostAddress = https://localhost:7003
+
+GET {{Widentity.Test.Api_HostAddress}}/Authentication/Login?username=dasjkdla
+###
+
+
+GET {{Widentity.Test.Api_HostAddress}}/Movie/Index
+Authorization: Bearer CfDJ8Ih5XWc-LKJLihOpSAt9Xmlmq1U1K2mzIlC2xhY7s4YF-2dFYoIPDA7ZAPYiaOwjOBxBBLDqVgngCW-TpX9n8CQ7OCJpwqLU2MvLxrWuNqLTjQ2mDDuIpjQparuDVimRm8DI1Kj8KBq5PVhczqPV_Mp_uT_Oh3aWvDpb9v289Dz1eWN9JVf6qCH8qKuKYKE9Tm64_mHwaZt2ZH3qiaoo0FDxyanZDkRlBs1QJtEaKWlCm2cbU6CKwZKdXmPC8ZrgWIbdXHPuvBWWt8eqBmfTNOQ
+###
