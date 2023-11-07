@@ -5,6 +5,9 @@ builder.Services.AddSocialLogin(x =>
     x.Google.ClientId = builder.Configuration["SocialLogin:Google:ClientId"];
     x.Google.ClientSecret = builder.Configuration["SocialLogin:Google:ClientSecret"];
     x.Google.RedirectUri = builder.Configuration["SocialLogin:Google:RedirectUri"];
+    x.Microsoft.ClientId = builder.Configuration["SocialLogin:Microsoft:ClientId"];
+    x.Microsoft.ClientSecret = builder.Configuration["SocialLogin:Microsoft:ClientSecret"];
+    x.Microsoft.RedirectUri = builder.Configuration["SocialLogin:Microsoft:RedirectUri"];
 },
 x =>
 {

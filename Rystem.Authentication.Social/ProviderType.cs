@@ -2,7 +2,7 @@
 {
     public enum ProviderType
     {
-        Google
+        Google,
+        Microsoft
     }
-
 }

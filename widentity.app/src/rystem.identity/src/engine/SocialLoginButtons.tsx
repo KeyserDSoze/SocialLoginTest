@@ -21,8 +21,8 @@ export const SocialLoginButtons = () => {
     const socialContext = useContext(SocialLoginContext);
     const onLoginStart = useCallback(() => {
     }, []);
-    const setProfile = (provider: number, data: any) => {
-        fetch(`${settings.apiUri}/api/Authentication/Social/Token?provider=${provider}&code=${data.code}`)
+    const setProfile = (provider: number, code: any) => {
+        fetch(`${settings.apiUri}/api/Authentication/Social/Token?provider=${provider}&code=${code}`)
             .then(t => {
                 return t.json();
             })
@@ -54,7 +54,7 @@ export const SocialLoginButtons = () => {
                         isOnlyGetToken={true}
                         onResolve={({ provider, data }: IResolveParams) => {
                             setProvider(provider);
-                            setProfile(0, data);
+                            setProfile(0, data.code);
                         }}>
                         <GoogleLoginButton />
                     </LoginSocialGoogle>
@@ -62,11 +62,12 @@ export const SocialLoginButtons = () => {
                 {settings.microsoft.clientId &&
                     <LoginSocialMicrosoft
                         client_id={settings.microsoft.clientId}
+                        tenant="consumers"
                         redirect_uri={settings.redirectUri}
                         onLoginStart={onLoginStart}
                         onResolve={({ provider, data }: IResolveParams) => {
                             setProvider(provider);
-                            setProfile(1, data);
+                            setProfile(1, data.id_token);
                         }}
                         onReject={(err: any) => {
                             console.log(err);

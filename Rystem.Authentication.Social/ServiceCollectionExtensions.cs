@@ -13,6 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services
                 .AddAuthentication()
                 .AddBearerToken(action!);
+            services.AddFactory<ITokenChecker, GoogleTokenChecker>(ProviderType.Google.ToString());
+            services.AddFactory<ITokenChecker, MicrosoftTokenChecker>(ProviderType.Microsoft.ToString());
             SocialLoginBuilder builder = new();
             settings(builder);
             services.AddSingleton(builder);
