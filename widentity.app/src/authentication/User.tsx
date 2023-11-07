@@ -15,7 +15,6 @@ export const User = memo(({ provider, profile, onLogout }: Props) => {
         profile?.picture?.data?.url ||
         profile?.profile_image_url_https ||
         'https://maxcdn.icons8.com/Share/icon/p1em/users//gender_neutral_user1600.png'
-    console.log(profile);
    
     return (
         <div className='card'>

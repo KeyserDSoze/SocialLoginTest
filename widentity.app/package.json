@@ -13,7 +13,6 @@
     "@react-oauth/google": "^0.11.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-social-login": "^3.4.17",
     "react-social-login-buttons": "^3.9.1",
     "reactjs-social-login": "^2.6.3"
   },

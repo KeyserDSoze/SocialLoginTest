@@ -15,10 +15,9 @@ const REDIRECT_URI =
 const Login = () => {
     const [provider, setProvider] = useState('');
     const [profile, setProfile] = useState<any>();
-
     const onLoginStart = useCallback(() => {
+        console.log("starting");
     }, []);
-
     const onLogout = useCallback(() => { }, []);
 
     return (
@@ -38,11 +37,8 @@ const Login = () => {
                     access_type="offline"
                     isOnlyGetToken={true}
                     onResolve={({ provider, data }: IResolveParams) => {
-                        console.log(provider);
                         setProvider(provider);
-                        console.log(data);
                         setProfile(data);
-                        console.log(data.code);
                         fetch("https://localhost:7003/api/Authentication/Social/Token?provider=0&code=" + data.code)
                             .then(t => {
                                 console.log(t);

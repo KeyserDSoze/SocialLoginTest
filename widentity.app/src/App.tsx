@@ -1,37 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Login from './authentication/Login'
+//import Login from './authentication/Login'
+import { setupSocialLogin } from "./rystem.identity/src/setup/setupSocialLogin"
+import { SocialLoginWrapper } from './rystem.identity/src/context/SocialLoginContext'
+import { Wrapper } from './components/wrapper'
 
+setupSocialLogin(x => {
+    x.apiUri = "https://localhost:7003";
+    x.google.clientId = "23769141170-lfs24avv5qrj00m4cbmrm202c0fc6gcg.apps.googleusercontent.com";
+});
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-          </p>
-      <Login></Login>
-    </>
-  )
+    return (
+        <>
+            <SocialLoginWrapper>
+                <Wrapper></Wrapper>
+            </SocialLoginWrapper>
+        </>
+    )
 }
 
 export default App
