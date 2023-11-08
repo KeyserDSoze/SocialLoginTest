@@ -1,8 +1,8 @@
 ﻿import { useReducer } from "react";
 import { useSocialToken } from "../hooks/useSocialToken";
-import { SocialLoginContextUpdate, SocialLoginContextRefresh } from "./SocialLoginContext";
+import { SocialLoginContextUpdate, SocialLoginContextRefresh } from "../index";
 import { SocialLoginManager } from "../setup/SocialLoginManager";
-
+import React from "react";
 
 export const SocialLoginWrapper = (c: { children: any; }) => {
     const [renderingKey, forceUpdate] = useReducer(x => x + 1, 0);

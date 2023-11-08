@@ -11,6 +11,7 @@ import {
 } from 'react-social-login-buttons';
 import { SocialLoginManager } from "../setup/SocialLoginManager";
 import { SocialLoginSettings } from "../models/setup/SocialLoginSettings";
+import React from "react";
 
 const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: number, code: any) => void): JSX.Element => {
     return (
@@ -23,9 +24,12 @@ const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: n
                     discoveryDocs="claims_supported"
                     access_type="offline"
                     isOnlyGetToken={true}
-                    onResolve={({ data }: IResolveParams) => {
-                        setProfile(1, data.code);
-                    }}>
+                    onResolve={(x: IResolveParams) => {
+                        setProfile(1, x.data?.code);
+                    }}
+                    onReject={function (): void {
+
+                    } }>
                     <GoogleLoginButton />
                 </LoginSocialGoogle>
             }
@@ -40,8 +44,8 @@ const getMicrosoftButton = (settings: SocialLoginSettings, setProfile: (provider
                     client_id={settings.microsoft.clientId}
                     tenant="consumers"
                     redirect_uri={settings.redirectUri}
-                    onResolve={({ data }: IResolveParams) => {
-                        setProfile(2, data.id_token);
+                    onResolve={(x: IResolveParams) => {
+                        setProfile(2, x.data?.id_token);
                     }}
                     onReject={(err: any) => {
                         console.log(err);
