@@ -46,7 +46,7 @@ const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: n
 }
 const getMicrosoftButton = (settings: SocialLoginSettings, setProfile: (provider: number, code: any) => void): SocialButtonValue => {
     return {
-        position: settings.google.indexOrder,
+        position: settings.microsoft.indexOrder,
         element: (
             <>
             {settings.microsoft.clientId &&

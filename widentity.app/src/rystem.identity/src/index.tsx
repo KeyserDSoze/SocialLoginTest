@@ -1,5 +1,5 @@
-export { SocialLoginButtons } from './engine/SocialLoginButtons'
-export { SocialLogoutButton } from './engine/SocialLogoutButton'
+export { SocialLoginButtons } from './buttons/SocialLoginButtons'
+export { SocialLogoutButton } from './buttons/SocialLogoutButton'
 export { SocialLoginWrapper } from './context/SocialLoginWrapper'
 export { SocialLoginContextUpdate, SocialLoginContextRefresh, SocialLoginContextLogout } from './context/SocialLoginContext'
 export { useSocialToken } from './hooks/useSocialToken'
