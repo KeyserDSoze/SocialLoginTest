@@ -25,5 +25,5 @@ namespace Rystem.Authentication.Social
             }
             return string.Empty;
         }
-    }
+    } 
 }

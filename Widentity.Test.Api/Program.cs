@@ -1,4 +1,6 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Widentity.Test.Api.Services;
+
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSocialLogin(x =>
 {
@@ -14,6 +16,7 @@ x =>
     x.BearerTokenExpiration = TimeSpan.FromDays(10);
     x.RefreshTokenExpiration = TimeSpan.FromDays(10);
 });
+builder.Services.AddSocialUserProvider<SocialUserProvider>();
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();

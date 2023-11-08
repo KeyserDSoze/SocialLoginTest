@@ -2,6 +2,7 @@
 {
     public enum ProviderType
     {
+        DotNet,
         Google,
         Microsoft
     }

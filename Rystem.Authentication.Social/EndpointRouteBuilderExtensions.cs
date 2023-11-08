@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.BearerToken;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +16,14 @@ namespace Microsoft.Extensions.DependencyInjection
             app.UseAuthentication();
             app.UseAuthorization();
             if (app is IEndpointRouteBuilder endpointBuilder)
+            {
                 endpointBuilder.Map("api/Authentication/Social/Token", async ([FromServices] SocialLoginBuilder socialSettings,
                     [FromServices] IHttpClientFactory clientFactory,
                     [FromServices] IClaimsCreator? claimCreator,
                     [FromServices] IFactory<ITokenChecker> tokenCheckerFactory,
-                [FromQuery] ProviderType provider,
-                [FromQuery] string code,
-                CancellationToken cancellationToken) =>
+                    [FromQuery] ProviderType provider,
+                    [FromQuery] string code,
+                    CancellationToken cancellationToken) =>
                 {
                     string? username = null;
                     var tokenChecker = tokenCheckerFactory.Create(provider.ToString());
@@ -41,6 +43,23 @@ namespace Microsoft.Extensions.DependencyInjection
                     }
                     return Results.BadRequest();
                 });
+                endpointBuilder
+                    .Map("api/Authentication/Social/User", async (HttpContext context,
+                            [FromServices] ISocialUserProvider? socialUserProvider,
+                            CancellationToken cancellationToken) =>
+                    {
+                        if (context?.User?.Identity?.IsAuthenticated == true)
+                        {
+                            if (socialUserProvider != null)
+                                return await socialUserProvider.GetAsync(context.User.Identity.Name, cancellationToken);
+                            else
+                                return new SocialUser { Username = context.User.Identity.Name };
+                        }
+                        else
+                            return SocialUser.Empty;
+                    })
+                    .RequireAuthorization();
+            }
             return app;
         }
     }

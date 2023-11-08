@@ -15,6 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddBearerToken(action!);
             services.AddFactory<ITokenChecker, GoogleTokenChecker>(ProviderType.Google.ToString());
             services.AddFactory<ITokenChecker, MicrosoftTokenChecker>(ProviderType.Microsoft.ToString());
+            services.AddFactory<ITokenChecker, DotNetTokenChecker>(ProviderType.DotNet.ToString());
             SocialLoginBuilder builder = new();
             settings(builder);
             services.AddSingleton(builder);
@@ -31,6 +32,12 @@ namespace Microsoft.Extensions.DependencyInjection
             where TStorage : class, IClaimsCreator
         {
             services.AddService<IClaimsCreator, TStorage>(lifetime);
+            return services;
+        }
+        public static IServiceCollection AddSocialUserProvider<TProvider>(this IServiceCollection services, ServiceLifetime lifetime = ServiceLifetime.Transient)
+            where TProvider : class, ISocialUserProvider
+        {
+            services.AddService<ISocialUserProvider, TProvider>(lifetime);
             return services;
         }
     }

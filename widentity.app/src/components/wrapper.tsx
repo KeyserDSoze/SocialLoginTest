@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SocialLoginButtons } from "../rystem.identity/src/engine/SocialLoginButtons";
 import { useSocialToken } from "../rystem.identity/src/setup/useSocialToken"
 import reactLogo from '../assets/react.svg'
+import { useSocialUser } from "../rystem.identity/src/setup/useSocialUser";
+import { SocialLoginContextRefresh } from "../rystem.identity/src/context/SocialLoginContext";
 
 export const Wrapper = () => {
     const token = useSocialToken();
     const [count, setCount] = useState(0);
+    const user = useSocialUser();
+    const forceRefresh = useContext(SocialLoginContextRefresh);
     return (
         <>
             <div>
@@ -27,6 +31,8 @@ export const Wrapper = () => {
             </p>
             {token.isExpired && <SocialLoginButtons></SocialLoginButtons>}
             {!token.isExpired && <div>{token.accessToken}</div>}
+            {user.isAuthenticated && <div>{user.username}</div>}
+            <button onClick={() => forceRefresh()}>force refresh</button>
         </>
     );
 }

@@ -1,6 +1,6 @@
 ﻿import { SocialLoginSettings } from "./SocialLoginSettings";
 import { SocialParameter } from "./SocialParameter";
-import { SocialLoginManager } from "./SocialLoginSettings.";
+import { SocialLoginManager } from "./SocialLoginManager";
 
 
 export const setupSocialLogin = function (settings: (settings: SocialLoginSettings) => void): SocialLoginManager {

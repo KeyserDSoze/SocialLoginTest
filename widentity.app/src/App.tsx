@@ -1,7 +1,7 @@
 import './App.css'
 //import Login from './authentication/Login'
 import { setupSocialLogin } from "./rystem.identity/src/setup/setupSocialLogin"
-import { SocialLoginWrapper } from './rystem.identity/src/context/SocialLoginContext'
+import { SocialLoginWrapper } from "./rystem.identity/src/context/SocialLoginWrapper";
 import { Wrapper } from './components/wrapper'
 
 setupSocialLogin(x => {
