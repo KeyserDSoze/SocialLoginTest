@@ -1,9 +1,9 @@
 {
-  "name": "rystem.repository.client",
+  "name": "rystem.identity",
   "version": "0.1.1",
   "author": "Alessandro Rapiti <alessandro.rapiti44@gmail.com>",
   "license": "MIT",
-  "description": "It can simplify the integration with rystem repository server.",
+  "description": "It can simplify the integration with social identities and .Net.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "dependencies": {

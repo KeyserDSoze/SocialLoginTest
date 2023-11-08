@@ -1,6 +1,6 @@
-﻿import { SocialLoginSettings } from "./SocialLoginSettings";
-import { SocialToken } from "./SocialToken";
-import { Token } from "./Token";
+﻿import { SocialLoginSettings } from "../models/setup/SocialLoginSettings";
+import { SocialToken } from "../models/SocialToken";
+import { Token } from "../models/Token";
 
 
 export class SocialLoginManager {

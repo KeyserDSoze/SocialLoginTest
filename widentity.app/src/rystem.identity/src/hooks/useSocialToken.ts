@@ -1,6 +1,6 @@
-﻿import { SocialLoginManager } from "./SocialLoginManager";
-import { Token } from "./Token";
-import { getSocialLoginSettings } from "./getSocialLoginSettings";
+﻿import { SocialLoginManager } from "../setup/SocialLoginManager";
+import { Token } from "../models/Token";
+import { getSocialLoginSettings } from "../setup/getSocialLoginSettings";
 
 
 export const useSocialToken = function (): Token {

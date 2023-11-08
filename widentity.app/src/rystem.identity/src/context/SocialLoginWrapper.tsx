@@ -1,5 +1,5 @@
 ﻿import { useReducer } from "react";
-import { useSocialToken } from "../setup/useSocialToken";
+import { useSocialToken } from "../hooks/useSocialToken";
 import { SocialLoginContextUpdate, SocialLoginContextRefresh } from "./SocialLoginContext";
 import { SocialLoginManager } from "../setup/SocialLoginManager";
 

@@ -1,4 +1,4 @@
-﻿import { SocialLoginSettings } from "./SocialLoginSettings";
+﻿import { SocialLoginSettings } from "../models/setup/SocialLoginSettings";
 import { SocialLoginManager } from "./SocialLoginManager";
 
 export const getSocialLoginSettings = function(): SocialLoginSettings {

@@ -4,7 +4,7 @@ export interface SocialLoginSettings {
     apiUri: string;
     redirectUri: string;
     automaticRefresh: boolean;
-    title: string;
+    title: string | null;
     google: SocialParameter;
     microsoft: SocialParameter;
 }

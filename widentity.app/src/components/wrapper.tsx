@@ -1,9 +1,6 @@
 import { useContext, useState } from "react";
-import { SocialLoginButtons } from "../rystem.identity/src/engine/SocialLoginButtons";
-import { useSocialToken } from "../rystem.identity/src/setup/useSocialToken"
 import reactLogo from '../assets/react.svg'
-import { useSocialUser } from "../rystem.identity/src/setup/useSocialUser";
-import { SocialLoginContextRefresh } from "../rystem.identity/src/context/SocialLoginContext";
+import { SocialLoginButtons, SocialLoginContextRefresh, useSocialToken, useSocialUser } from "../rystem.identity/src";
 
 export const Wrapper = () => {
     const token = useSocialToken();

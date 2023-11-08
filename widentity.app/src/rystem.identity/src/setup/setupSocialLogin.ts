@@ -1,5 +1,5 @@
-﻿import { SocialLoginSettings } from "./SocialLoginSettings";
-import { SocialParameter } from "./SocialParameter";
+﻿import { SocialLoginSettings } from "../models/setup/SocialLoginSettings";
+import { SocialParameter } from "../models/setup/SocialParameter";
 import { SocialLoginManager } from "./SocialLoginManager";
 
 
@@ -8,7 +8,7 @@ export const setupSocialLogin = function (settings: (settings: SocialLoginSettin
     const baseUri = `${url.protocol}//${url.host}`;
     const parameters = {
         apiUri: baseUri,
-        title: "Social Login",
+        title: null,
         redirectUri: `${baseUri}/account/login`,
         google: {} as SocialParameter,
         microsoft: {} as SocialParameter

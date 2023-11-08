@@ -13,7 +13,7 @@ builder.Services.AddSocialLogin(x =>
 },
 x =>
 {
-    x.BearerTokenExpiration = TimeSpan.FromDays(10);
+    x.BearerTokenExpiration = TimeSpan.FromHours(1);
     x.RefreshTokenExpiration = TimeSpan.FromDays(10);
 });
 builder.Services.AddSocialUserProvider<SocialUserProvider>();
