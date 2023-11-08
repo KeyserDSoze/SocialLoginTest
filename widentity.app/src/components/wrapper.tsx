@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import reactLogo from '../assets/react.svg'
-import { SocialLoginButtons, SocialLoginContextRefresh, useSocialToken, useSocialUser } from "../rystem.identity/src";
+import { SocialLoginButtons, SocialLoginContextLogout, SocialLoginContextRefresh, SocialLogoutButton, useSocialToken, useSocialUser } from "../rystem.identity/src";
 
 export const Wrapper = () => {
     const token = useSocialToken();
     const [count, setCount] = useState(0);
     const user = useSocialUser();
     const forceRefresh = useContext(SocialLoginContextRefresh);
+    const logout = useContext(SocialLoginContextLogout);
     return (
         <>
             <div>
@@ -30,6 +31,10 @@ export const Wrapper = () => {
             {!token.isExpired && <div>{token.accessToken}</div>}
             {user.isAuthenticated && <div>{user.username}</div>}
             <button onClick={() => forceRefresh()}>force refresh</button>
+            <button onClick={() => logout()}>logout</button>
+            <SocialLogoutButton>
+                logout
+            </SocialLogoutButton>
         </>
     );
 }

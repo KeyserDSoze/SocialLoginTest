@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.DependencyInjection
             app.UseAuthorization();
             if (app is IEndpointRouteBuilder endpointBuilder)
             {
-                endpointBuilder.Map("api/Authentication/Social/Token", async ([FromServices] SocialLoginBuilder socialSettings,
+                endpointBuilder.Map("api/Authentication/Social/Token", async (
+                    [FromServices] SocialLoginBuilder socialSettings,
                     [FromServices] IHttpClientFactory clientFactory,
                     [FromServices] IClaimsCreator? claimCreator,
                     [FromServices] IFactory<ITokenChecker> tokenCheckerFactory,
@@ -42,9 +43,14 @@ namespace Microsoft.Extensions.DependencyInjection
                         return Results.SignIn(claimsPrincipal);
                     }
                     return Results.BadRequest();
-                });
+                })
+                .WithName("/Social/Token")
+                .WithDisplayName("/Social/Token")
+                .WithGroupName("Social")
+                .WithDescription("Get token from social login.");
                 endpointBuilder
-                    .Map("api/Authentication/Social/User", async (HttpContext context,
+                    .Map("api/Authentication/Social/User", async (
+                            HttpContext context,
                             [FromServices] ISocialUserProvider? socialUserProvider,
                             CancellationToken cancellationToken) =>
                     {
@@ -58,6 +64,10 @@ namespace Microsoft.Extensions.DependencyInjection
                         else
                             return SocialUser.Empty;
                     })
+                    .WithName("/Social/User")
+                    .WithDisplayName("/Social/User")
+                    .WithGroupName("Social")
+                    .WithDescription("Get user from social login.")
                     .RequireAuthorization();
             }
             return app;

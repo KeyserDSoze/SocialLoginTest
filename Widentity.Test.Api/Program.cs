@@ -40,7 +40,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseSocialLoginEndpoint();
 app.MapControllers();
+app.UseSocialLoginEndpoint();
 
 app.Run();

@@ -1,6 +1,7 @@
 ﻿using Google.Apis.Auth;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json.Serialization;
 
 namespace Rystem.Authentication.Social
 {
@@ -24,6 +25,21 @@ namespace Rystem.Authentication.Social
                 }
             }
             return string.Empty;
+        }
+        private sealed class AuthenticationResponse
+        {
+            [JsonPropertyName("access_token")]
+            public required string AccessToken { get; set; }
+            [JsonPropertyName("expires_in")]
+            public int ExpiresIn { get; set; }
+            [JsonPropertyName("refresh_token")]
+            public required string RefreshToken { get; set; }
+            [JsonPropertyName("scope")]
+            public required string Scope { get; set; }
+            [JsonPropertyName("token_type")]
+            public required string TokenType { get; set; }
+            [JsonPropertyName("id_token")]
+            public required string IdToken { get; set; }
         }
     } 
 }

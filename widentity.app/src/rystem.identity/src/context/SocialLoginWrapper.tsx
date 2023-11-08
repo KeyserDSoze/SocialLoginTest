@@ -1,6 +1,6 @@
 ﻿import { useReducer } from "react";
 import { useSocialToken } from "../hooks/useSocialToken";
-import { SocialLoginContextUpdate, SocialLoginContextRefresh } from "../index";
+import { SocialLoginContextUpdate, SocialLoginContextRefresh, SocialLoginContextLogout, removeSocialLogin } from "../index";
 import { SocialLoginManager } from "../setup/SocialLoginManager";
 import React from "react";
 
@@ -11,11 +11,17 @@ export const SocialLoginWrapper = (c: { children: any; }) => {
         const oldToken = useSocialToken();
         SocialLoginManager.Instance(null).updateToken(0, oldToken.refreshToken);
     };
+    const forceLogout = () => {
+        removeSocialLogin();
+        forceUpdate();
+    };
     return (
         <div key={renderingKey}>
             <SocialLoginContextUpdate.Provider value={forceUpdate}>
                 <SocialLoginContextRefresh.Provider value={forceRefresh}>
-                    {c.children}
+                    <SocialLoginContextLogout.Provider value={forceLogout}>
+                        {c.children}
+                    </SocialLoginContextLogout.Provider>
                 </SocialLoginContextRefresh.Provider>
             </SocialLoginContextUpdate.Provider>
         </div>
