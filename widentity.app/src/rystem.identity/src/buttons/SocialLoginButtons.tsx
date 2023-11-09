@@ -35,7 +35,6 @@ const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: n
                             setProfile(1, x.data?.code);
                         }}
                         onReject={function (): void {
-
                         }}>
                         <GoogleLoginButton />
                     </LoginSocialGoogle>

@@ -1,15 +1,21 @@
 ﻿using Rystem.Authentication.Social;
+using System.Security.Claims;
 
 namespace Widentity.Test.Api.Services
 {
     internal sealed class SocialUserProvider : ISocialUserProvider
     {
-        public Task<SocialUser> GetAsync(string username, CancellationToken cancellationToken)
+        public Task<SocialUser> GetAsync(string username, IEnumerable<Claim> claims, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new SocialUser
+            return Task.FromResult(new SuperSocialUser
             {
-                Username = $"a {username}"
-            });
+                Username = $"a {username}",
+                Email = username
+            } as SocialUser);
         }
+    }
+    public sealed class SuperSocialUser : SocialUser
+    {
+        public string Email { get; set; }
     }
 }
