@@ -22,7 +22,7 @@ const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: n
     return {
         position: settings.google.indexOrder,
         element: (
-            <>
+            <div key="g">
                 {settings.google.clientId != null &&
                     <LoginSocialGoogle
                         client_id={settings.google.clientId}
@@ -40,7 +40,7 @@ const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: n
                         <GoogleLoginButton />
                     </LoginSocialGoogle>
                 }
-            </>
+            </div>
         )
     } as SocialButtonValue;
 }
@@ -48,24 +48,25 @@ const getMicrosoftButton = (settings: SocialLoginSettings, setProfile: (provider
     return {
         position: settings.microsoft.indexOrder,
         element: (
-            <>
-            {settings.microsoft.clientId &&
-                <LoginSocialMicrosoft
-                    client_id={settings.microsoft.clientId}
-                    tenant="consumers"
-                    redirect_uri={settings.redirectUri}
-                    onResolve={(x: IResolveParams) => {
-                        setProfile(2, x.data?.id_token);
-                    }}
-                    onReject={(err: any) => {
-                        console.log(err);
-                    }}
-                >
-                    <MicrosoftLoginButton />
-                </LoginSocialMicrosoft>
-            }
-        </>
-    )
+            <div key="m">
+                {settings.microsoft.clientId &&
+                    <LoginSocialMicrosoft
+                        client_id={settings.microsoft.clientId}
+                        tenant="consumers"
+                        redirect_uri={settings.redirectUri}
+                        onResolve={(x: IResolveParams) => {
+                            setProfile(2, x.data?.id_token);
+                        }}
+                        onReject={(err: any) => {
+                            console.log(err);
+                        }}
+                        isOnlyGetToken={true}
+                    >
+                        <MicrosoftLoginButton />
+                    </LoginSocialMicrosoft>
+                }
+            </div>
+        )
     } as SocialButtonValue;
 }
 

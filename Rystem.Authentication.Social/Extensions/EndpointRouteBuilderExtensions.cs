@@ -42,7 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection
                        );
                         return Results.SignIn(claimsPrincipal);
                     }
-                    return Results.BadRequest();
+                    return Results.Unauthorized();
                 })
                 .WithName("/Social/Token")
                 .WithDisplayName("/Social/Token")
@@ -57,12 +57,12 @@ namespace Microsoft.Extensions.DependencyInjection
                         if (context?.User?.Identity?.IsAuthenticated == true)
                         {
                             if (socialUserProvider != null)
-                                return await socialUserProvider.GetAsync(context.User.Identity.Name, cancellationToken);
+                                return Results.Json(await socialUserProvider.GetAsync(context.User.Identity.Name, cancellationToken));
                             else
-                                return new SocialUser { Username = context.User.Identity.Name };
+                                return Results.Json(new SocialUser { Username = context.User.Identity.Name });
                         }
                         else
-                            return SocialUser.Empty;
+                            return Results.Unauthorized();
                     })
                     .WithName("/Social/User")
                     .WithDisplayName("/Social/User")
