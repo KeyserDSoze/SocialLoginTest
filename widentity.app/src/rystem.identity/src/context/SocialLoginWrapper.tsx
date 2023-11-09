@@ -4,13 +4,14 @@ import { SocialLoginContextUpdate, SocialLoginContextRefresh, SocialLoginContext
 import { SocialLoginManager } from "../setup/SocialLoginManager";
 import React from "react";
 
+const forceRefresh = () => {
+    const oldToken = useSocialToken();
+    SocialLoginManager.Instance(null).updateToken(0, oldToken.refreshToken);
+};
+
 export const SocialLoginWrapper = (c: { children: any; }) => {
     const [renderingKey, forceUpdate] = useReducer(x => x + 1, 0);
     SocialLoginManager.Instance(null).refresher = () => forceUpdate();
-    const forceRefresh = () => {
-        const oldToken = useSocialToken();
-        SocialLoginManager.Instance(null).updateToken(0, oldToken.refreshToken);
-    };
     const forceLogout = () => {
         removeSocialLogin();
         forceUpdate();

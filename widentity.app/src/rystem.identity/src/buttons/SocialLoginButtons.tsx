@@ -3,9 +3,11 @@ import {
     LoginSocialGoogle,
     LoginSocialMicrosoft,
     IResolveParams,
+    LoginSocialFacebook,
 } from 'reactjs-social-login';
 
 import {
+    FacebookLoginButton,
     GoogleLoginButton,
     MicrosoftLoginButton,
 } from 'react-social-login-buttons';
@@ -19,6 +21,7 @@ interface SocialButtonValue {
 }
 
 const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: number, code: any) => void): SocialButtonValue => {
+    const redirectUri = `${settings.redirectDomain}/account/login`;
     return {
         position: settings.google.indexOrder,
         element: (
@@ -26,7 +29,7 @@ const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: n
                 {settings.google.clientId != null &&
                     <LoginSocialGoogle
                         client_id={settings.google.clientId}
-                        redirect_uri={settings.redirectUri}
+                        redirect_uri={redirectUri}
                         scope="openid profile email"
                         discoveryDocs="claims_supported"
                         access_type="offline"
@@ -43,7 +46,9 @@ const getGoogleButton = (settings: SocialLoginSettings, setProfile: (provider: n
         )
     } as SocialButtonValue;
 }
+
 const getMicrosoftButton = (settings: SocialLoginSettings, setProfile: (provider: number, code: any) => void): SocialButtonValue => {
+    const redirectUri = `${settings.redirectDomain}/account/login`;
     return {
         position: settings.microsoft.indexOrder,
         element: (
@@ -52,7 +57,7 @@ const getMicrosoftButton = (settings: SocialLoginSettings, setProfile: (provider
                     <LoginSocialMicrosoft
                         client_id={settings.microsoft.clientId}
                         tenant="consumers"
-                        redirect_uri={settings.redirectUri}
+                        redirect_uri={redirectUri}
                         onResolve={(x: IResolveParams) => {
                             setProfile(2, x.data?.id_token);
                         }}
@@ -69,9 +74,38 @@ const getMicrosoftButton = (settings: SocialLoginSettings, setProfile: (provider
     } as SocialButtonValue;
 }
 
+const getFacebookButton = (settings: SocialLoginSettings, setProfile: (provider: number, code: any) => void): SocialButtonValue => {
+    const redirectUri = `${settings.redirectDomain}/account/login`;
+    return {
+        position: settings.facebook.indexOrder,
+        element: (
+            <div key="f">
+                {settings.facebook.clientId != null &&
+                    <LoginSocialFacebook
+                        appId={settings.facebook.clientId}
+                        fieldsProfile={
+                            'id,first_name,last_name,middle_name,name,name_format,picture,short_name,email,gender'
+                        }
+                        redirect_uri={redirectUri}
+                        onResolve={(x: IResolveParams) => {
+                            setProfile(3, x.data?.accessToken);
+                        }}
+                        onReject={err => {
+                        }}
+                        isOnlyGetToken={true}
+                    >
+                        <FacebookLoginButton />
+                    </LoginSocialFacebook>
+                }
+            </div>
+        )
+    } as SocialButtonValue;
+}
+
 const getButtons = new Array<(settings: SocialLoginSettings, setProfile: (provider: number, code: any) => void) => SocialButtonValue>;
 getButtons.push(getGoogleButton);
 getButtons.push(getMicrosoftButton);
+getButtons.push(getFacebookButton);
 
 export const SocialLoginButtons = () => {
     const settings = getSocialLoginSettings();

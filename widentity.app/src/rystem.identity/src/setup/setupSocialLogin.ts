@@ -9,9 +9,10 @@ export const setupSocialLogin = function (settings: (settings: SocialLoginSettin
     const parameters = {
         apiUri: baseUri,
         title: null,
-        redirectUri: `${baseUri}/account/login`,
+        redirectDomain: baseUri,
         google: { indexOrder: 0 } as SocialParameter,
-        microsoft: { indexOrder: 1 } as SocialParameter
+        microsoft: { indexOrder: 1 } as SocialParameter,
+        facebook: { indexOrder: 2 } as SocialParameter
     } as SocialLoginSettings;
     settings(parameters);
     return SocialLoginManager.Instance(parameters);

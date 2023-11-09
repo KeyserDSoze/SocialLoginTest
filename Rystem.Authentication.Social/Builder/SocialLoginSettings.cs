@@ -4,7 +4,7 @@
     {
         public string? ClientId { get; set; }
         public string? ClientSecret { get; set; }
-        public string? RedirectUri { get; set; }
-        public bool HasValue => ClientId != null && ClientSecret != null && RedirectUri != null;
+        public string? RedirectDomain { get; set; }
+        public bool HasValue => ClientId != null && ClientSecret != null && RedirectDomain != null;
     }
 }

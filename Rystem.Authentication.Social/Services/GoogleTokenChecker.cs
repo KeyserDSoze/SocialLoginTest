@@ -13,7 +13,7 @@ namespace Rystem.Authentication.Social
         {
             var settings = loginBuilder.Google;
             var client = clientFactory.CreateClient(Constants.GoogleAuthenticationClient);
-            var content = new StringContent(string.Format(GooglePostMessage, settings.ClientId, settings.ClientSecret, code, settings.RedirectUri), s_mediaTypeHeaderValue);
+            var content = new StringContent(string.Format(GooglePostMessage, settings.ClientId, settings.ClientSecret, code, settings.RedirectDomain), s_mediaTypeHeaderValue);
             var response = await client.PostAsync(string.Empty, content);
             if (response.IsSuccessStatusCode)
             {

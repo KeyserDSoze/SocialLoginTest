@@ -1,5 +1,4 @@
 import './App.css'
-//import Login from './authentication/Login'
 import { Wrapper } from './components/wrapper'
 import { SocialLoginWrapper, setupSocialLogin } from './rystem.identity/src';
 
@@ -9,6 +8,8 @@ setupSocialLogin(x => {
     x.google.indexOrder = 1;
     x.microsoft.clientId = "0b90db07-be9f-4b29-b673-9e8ee9265927";
     x.microsoft.indexOrder = 0;
+    x.facebook.clientId = "345885718092912";
+    x.facebook.indexOrder = 2;
     x.automaticRefresh = true;
 });
 function App() {
